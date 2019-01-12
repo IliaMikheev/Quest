@@ -4,6 +4,7 @@
 #include <QDebug>
 #include <QCoreApplication>
 #include <QFile>
+#include <QIODevice>
 
 class XmlStoryReaderTest : public QObject
 {
@@ -26,16 +27,14 @@ void XmlStoryReaderTest::testCase1()
     qDebug() << qApp->applicationDirPath();
     qDebug() << qApp->applicationFilePath();
 
-    QFile file();
-    //QFile file()
+    QFile file("story.xml");
+    QVERIFY2(file.open(QIODevice::ReadOnly), "File not open!");
+    XmlStoryReader reader(&file);
+    while (reader.next()) {
+        QString name = reader.name(); // А чем инициализированы эти точки?
+        QVERIFY2(!name.isEmpty(), "Point is Empty!");
+    }
 
-
-    //XmlStoryReader reader();
-
-    //XmlStoryReader reader()
-    //QCOMPARE(reader.test(),QString("I AM STORY READER"));
-    //qDebug() << reader.test();
-    //QVERIFY2(true, "Failure");
 }
 
 QTEST_MAIN(XmlStoryReaderTest)
