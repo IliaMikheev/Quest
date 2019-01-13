@@ -17,10 +17,7 @@ class XmlStoryReaderTest : public QObject
 public:
     XmlStoryReaderTest();
 
-
-
 private Q_SLOTS:
-
     void testCase1();
     void testCase2();
     void testCase3();
@@ -128,7 +125,7 @@ void XmlStoryReaderTest::printPointEntry(const QHash<QString, uint> & entry, QSt
 {
     auto iter = entry.begin();
     auto end = entry.end();
-    while( iter != end) {
+    while( iter != end ) {
         qDebug() << name << ": " << iter.key() << " " << iter.value();
         iter++;
     }
