@@ -54,7 +54,7 @@ void InventaryListModel::addItemCopy(const QString &name, uint count)
     if (!m_itemHash.contains(name)) { // т.е. элемента с таким именем ещё нет
         int row =  m_data.length(); // т.к. новый вид ресурсов добавляется в конец
         m_itemHash[name] = row;
-        QModelIndex index = createIndex(row, 0, static_cast<void *>(0));
+        QModelIndex index = indexWithRow(row);
         beginInsertRows(QModelIndex(), row, row);
         m_data.append(Items{name, count});
         endInsertRows();
@@ -70,7 +70,7 @@ void InventaryListModel::addItemCopy(const QString &name, uint count)
         m_data[row].count += count;
     }
 
-    QModelIndex index = createIndex(row, 0, static_cast<void *>(0));
+    QModelIndex index = indexWithRow(row);
     emit dataChanged(index,index);
 }
 
@@ -89,7 +89,7 @@ void InventaryListModel::dropItemCopy(const QString &name, uint count)
 
     int row = m_itemHash[name];
     if (count >= m_data[row].count) {// Если нужно забрать из инвентаря все копии данного предмета или больше чем есть
-        QModelIndex index = indexForName(name);
+        //QModelIndex index = indexForName(name);
         beginRemoveRows(QModelIndex(), row, row);
         m_data.removeAt(row);        
         endRemoveRows();
@@ -99,7 +99,8 @@ void InventaryListModel::dropItemCopy(const QString &name, uint count)
 
     m_data[row].count -= count;
 
-    QModelIndex index = indexForName(name);
+    //QModelIndex index = indexForName(name);
+    QModelIndex index = indexWithRow(row);
     emit dataChanged(index,index);
 }
 
@@ -115,19 +116,15 @@ void InventaryListModel::changeItems(const QString &name, uint count, bool add)
         dropItemCopy(name, count);
 }
 
-/*! Возвращает индекс элемента согласно его имени */
-QModelIndex InventaryListModel::indexForName(const QString &name) {
-    if (!m_itemHash.contains(name)) {
-        return QModelIndex();
-    }
-    int row =m_itemHash[name];
-    QModelIndex index = createIndex(row, 0, static_cast<void *>(0));
-    return index;
+/*! Возвращает индекс элемента с установленным номером строки */
+QModelIndex InventaryListModel::indexWithRow(int row)
+{
+    return createIndex(row, 0, static_cast<void *>(Q_NULLPTR));
 }
 
 /*! Возвращает количество экземпляров данного предмета
  * Если их нет, возвращает 0 */
-int InventaryListModel::itemCopyCount(const QString &name) const
+uint InventaryListModel::itemCopyCount(const QString &name) const
 {
     int row = m_data.indexOf(Items{name,0});
     if (row == -1){

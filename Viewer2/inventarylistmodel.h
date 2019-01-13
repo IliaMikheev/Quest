@@ -35,19 +35,18 @@ public:
     void dropItemCopy(const QString & name, uint count);
     void changeItems(const QString & name, uint count, bool add);
 
-    int itemCopyCount(const QString &name) const;
+    uint itemCopyCount(const QString &name) const;
     //const QHash<QString, int> &toHash() const;
     bool containsAtLeast(const QString &name, uint count);    
     bool isInventaryHas(const QHash<QString, uint> &requiredItems);
 
 private:
-    void updateItemHash();
+    void updateItemHash();    
+    QModelIndex indexWithRow(int row);
 
-
-    QModelIndex indexForName(const QString &name);
     QHash<QString, int> m_itemHash; // Имена предметов в инвентаре и количество экземпляров каждого предмета
-
     QList<Items> m_data;
+
 };
 
 #endif // INVENTARYLISTMODEL_H
