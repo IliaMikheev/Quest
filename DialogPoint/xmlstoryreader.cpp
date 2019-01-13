@@ -133,7 +133,7 @@ void XmlStoryReader::fillResourcesData()
 DialogPoint::Resource XmlStoryReader::getResource(QStringRef name, bool * ok) {
     DialogPoint::Resource resource;
     bool isOk = true;
-    if (name == "Keys") {
+    if (name == "Key") {
         resource = DialogPoint::Keys;
     }
     else if (name == "Award") {
