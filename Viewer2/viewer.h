@@ -8,13 +8,13 @@
 #include "../DialogPoint/dialogpoint.h"
 #include <QStack>
 
-class Viewer2 : public QObject
+class Viewer : public QObject
 {
     Q_OBJECT
 
     Q_PROPERTY(QString answer READ answer NOTIFY answerChanged)
 public:
-    explicit Viewer2(QObject *parent = 0);
+    explicit Viewer(QObject *parent = Q_NULLPTR);
 
 
     void initModels(QQmlApplicationEngine &engine);
