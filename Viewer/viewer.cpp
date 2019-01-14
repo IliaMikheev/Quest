@@ -1,6 +1,9 @@
 #include "viewer.h"
 #include <QQmlContext>
 #include <QDebug>
+#include "../DialogPoint/xmlstoryreader.h"
+#include <QFile>
+#include <QCoreApplication>
 
 Viewer::Viewer(QObject *parent) : QObject(parent)
 {
@@ -13,8 +16,10 @@ void Viewer::initModels(QQmlApplicationEngine &engine)
     m_jumpListModel = new JumpListModel();
     m_inventaryModel = new InventaryListModel();
 
-    initDialog();
-    jumpTo("First point");
+    m_inventaryModel->addItemCopy("Gold", 50);
+    openStory();
+    //initDialog();
+    jumpTo("First");
 
     QQmlContext *context = engine.rootContext();
 
@@ -118,12 +123,9 @@ QStringList Viewer::filterAvaileble(const QStringList &jumpsNames) {
 }
 
 
-/*! Создаёт набор точек, настраивает их, и добавляет их в m_storyPoints
- *
-*/
+/*! Создаёт набор точек, настраивает их, и добавляет их в m_storyPoints */
 void Viewer::initDialog()
-{
-    m_inventaryModel->addItemCopy("Gold", 50);
+{    
     DialogPoint point1;
     DialogPoint point2;
     DialogPoint point3;
@@ -175,6 +177,24 @@ void Viewer::initDialog()
     m_storyPoints.insert(point3.name(), point3);
     m_storyPoints.insert(point4.name(), point4);
     m_storyPoints.insert(point5.name(), point5);
+}
+
+/*! Читает историю из xml-файла и наполняет m_storyPoints */
+void Viewer::openStory()
+{
+    QString path = qApp->applicationDirPath() + "/story.xml";
+    QFile file(path);
+    if (!file.open(QIODevice::ReadOnly)) {
+        qDebug() << "FILE NOT OPEN!!!!!!";
+        return;
+        // to do: сделать нормальное окно с предкпреждением вместо qDebug
+    }
+    XmlStoryReader reader(&file);
+    while (reader.next()) {
+        DialogPoint point = reader.point();
+        m_storyPoints.insert(point.name(), point);
+    }
+
 }
 
 

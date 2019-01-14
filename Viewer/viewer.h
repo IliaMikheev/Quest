@@ -33,6 +33,8 @@ public slots:
 private:
     QStringList filterAvaileble(const QStringList &jumpsNames);
     void initDialog();
+    void openStory();
+
     void addToInventary(const QHash<QString, uint> &items);
     void dropFromInventary(const QHash<QString, uint> &items);
 
@@ -42,6 +44,7 @@ private:
     DialogPoint m_point;
     QHash<QString, DialogPoint> m_storyPoints;
     QStack<QString> m_jumpStack;
+
 
 
 
