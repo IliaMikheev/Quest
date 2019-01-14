@@ -8,10 +8,7 @@ Item {
         focus: true
         cellHeight: parent.height / 3.04
         cellWidth: parent.width / 5.035
-
         model: inventaryModel
-        //model: jumpListModel
-
         delegate: delegate
     }
 
@@ -24,8 +21,7 @@ Item {
             Row {
                 spacing: 2
                 anchors.centerIn: parent
-                Text {
-                    //text: model.textRole
+                Text {                    
                     text: model.name
                 }
                 Text { text: model.count }
