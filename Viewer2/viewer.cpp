@@ -1,13 +1,13 @@
-#include "viewer2.h"
+#include "viewer.h"
 #include <QQmlContext>
 #include <QDebug>
 
-Viewer2::Viewer2(QObject *parent) : QObject(parent)
+Viewer::Viewer(QObject *parent) : QObject(parent)
 {
 
 }
 
-void Viewer2::initModels(QQmlApplicationEngine &engine)
+void Viewer::initModels(QQmlApplicationEngine &engine)
 {
 
     m_jumpListModel = new JumpListModel();
@@ -23,13 +23,13 @@ void Viewer2::initModels(QQmlApplicationEngine &engine)
     context->setContextProperty("inventaryModel", m_inventaryModel);
 }
 
-QString Viewer2::answer()
+QString Viewer::answer()
 {
     return m_answer;
 }
 
 /*! Переход в точку  именем \a pointName */
-void Viewer2::jumpTo(const QString &pointName)
+void Viewer::jumpTo(const QString &pointName)
 {
     const DialogPoint &point  = m_storyPoints[pointName];
 
@@ -52,7 +52,7 @@ void Viewer2::jumpTo(const QString &pointName)
  *  Для этого - обновляет значения jumpListModel, добавляет и убирает ресурсы
  *  в инвентаре
 */
-void Viewer2::onJumpSelected(int index)
+void Viewer::onJumpSelected(int index)
 {
     QString text = m_jumpListModel->pointText(index); // Спорно. Видимо, придётся перейти к интовым id
     const DialogPoint &point = m_storyPoints[text];
@@ -77,7 +77,7 @@ void Viewer2::onJumpSelected(int index)
  *  выполнить действия с ресурсами в обратном порядке. По этому, достигнутое
  *  состояние в стеке не храним, храним только имена точек.
 */
-void Viewer2::onJumpBack()
+void Viewer::onJumpBack()
 {
     if (m_jumpStack.isEmpty())
         return;
@@ -100,7 +100,7 @@ void Viewer2::onJumpBack()
  *  Так. На сегодняшний момент (06.11.18, утро) filterAvailable может возвращать пустой QStringList
  *  С пустым списком переходов приложение падает
 */
-QStringList Viewer2::filterAvaileble(const QStringList &jumpsNames) {
+QStringList Viewer::filterAvaileble(const QStringList &jumpsNames) {
     QStringList  availableJumps;
 
     foreach (QString name, jumpsNames) {
@@ -121,7 +121,7 @@ QStringList Viewer2::filterAvaileble(const QStringList &jumpsNames) {
 /*! Создаёт набор точек, настраивает их, и добавляет их в m_storyPoints
  *
 */
-void Viewer2::initDialog()
+void Viewer::initDialog()
 {
     m_inventaryModel->addItemCopy("Gold", 50);
     DialogPoint point1;
@@ -179,7 +179,7 @@ void Viewer2::initDialog()
 
 
 /*! Добавляет в инвентарь все предметы из словаря  \a items */
-void Viewer2::addToInventary(const QHash<QString, uint> & items) {
+void Viewer::addToInventary(const QHash<QString, uint> & items) {
     auto iter = items.begin();
     auto end = items.end();
 
@@ -191,7 +191,7 @@ void Viewer2::addToInventary(const QHash<QString, uint> & items) {
 }
 
 /*! Убирает из инвентаря все предметы из словаря  \a items */
-void Viewer2::dropFromInventary(const QHash<QString, uint> & items) {
+void Viewer::dropFromInventary(const QHash<QString, uint> & items) {
     auto iter = items.begin();
     auto end = items.end();
 
