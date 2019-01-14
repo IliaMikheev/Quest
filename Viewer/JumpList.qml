@@ -6,9 +6,7 @@ Item {
         anchors.margins: 1
         spacing: 1
         focus: true
-
-        model: jumpListModel
-        //delegate: //jumpListDelegate
+        model: jumpListModel        
 
         delegate: Component {
             id: jumpListDelegate
@@ -18,8 +16,7 @@ Item {
                 height: 30
                 radius: height / 4
                 color: "lightGreen"
-                border.color: "darkGreen"
-                //border.pixelAligned: 1=
+                border.color: "darkGreen"               
                 Text {
                     anchors.centerIn: parent
                     renderType: Text.NativeRendering

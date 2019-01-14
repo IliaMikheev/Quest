@@ -4,37 +4,43 @@ import QtQuick.Controls 1.4
 
 ApplicationWindow {
     visible: true
-    width: 640
+    width: 320
     height: 480
-    //title: qsTr("Hello World")
+    title: qsTr("Story viewer")
 
-    TextArea {
-        text: viewer.answer
-    }
 
     Rectangle {
         id: inventaryBox
-        width: parent.width / 2
-        height: parent.height * 0.3
+        width: parent.width // / 2
+        height: parent.height * 0.15
         border.color: "green";
         border.width: 1;
         anchors.right: parent.right
-        anchors.top: parent.top
+        anchors.top: answerBrouser.bottom
         Inventary {
             id: inventary
             anchors.fill: parent
         }
     }
+
+    TextArea {
+        id: answerBrouser
+        width: parent.width
+        height: parent.height * 0.5
+        text: viewer.answer
+    }
+
+
     Rectangle {
         id: jumplistBox
-        width: parent.width / 2
-        height: parent.height * 0.63
+        width: parent.width
+        height: parent.height * 0.3
         border.color: "green";
         border.width: 1;
         anchors.right: parent.right
         anchors.top: borderBox.bottom
-        JumpList {
-            //anchors.top: inventary.bottom
+        anchors.bottom: parent.bottom
+        JumpList {            
             anchors.fill: parent
         }
     }
@@ -42,13 +48,12 @@ ApplicationWindow {
         id: borderBox
         anchors.top: inventaryBox.bottom
         anchors.right: parent.right
-        width: parent.width / 2
+        width: parent.width
         height: parent.height * 0.07
         color: "green"
 
         Rectangle {
-            id: backButton
-            //text: "back"
+            id: backButton           
             height: parent.height * 0.8
             width: text.width * 1.5
             anchors.right: parent.right
@@ -68,21 +73,17 @@ ApplicationWindow {
                 onPressed: {
                     parent.color = "green"
                 }
-                onClicked: {
-                    //console.log("clicked")
-                   viewer.onJumpBack()
-                    //dialogController.jumpSelected(model.index)
+                onClicked: {                    
+                   viewer.onJumpBack()                    
                 }
                 onReleased: {
                     parent.color = "lightGreen"
                 }
-
                 onCanceled: {
                     parent.color = "lightGreen"
                 }
             }
         }
     }
-
 }
 
