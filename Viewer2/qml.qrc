@@ -1,7 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file>main.qml</file>
-        <file>Inventary.qml</file>
-        <file>JumpList.qml</file>
-    </qresource>
-</RCC>
