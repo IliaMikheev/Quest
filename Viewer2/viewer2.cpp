@@ -9,46 +9,18 @@ Viewer2::Viewer2(QObject *parent) : QObject(parent)
 
 void Viewer2::initModels(QQmlApplicationEngine &engine)
 {
-    /*
-    QStringList lst;
-    lst << "первый" << "второй";
-
-    m_point.setName("Name");
-    m_point.setAnswer("answer");
-    m_point.setJumps(lst);
-    m_point.addEntryKey("Green sleeves", 2);
-
-
-
-    m_answer = m_point.answer();
-    emit answerChanged(m_answer);
-    */
 
     m_jumpListModel = new JumpListModel();
     m_inventaryModel = new InventaryListModel();
 
     initDialog();
     jumpTo("First point");
-    /*
-
-    m_jumpListModel->setTexts(m_point.jumps());
-
-    m_inventaryModel->addItemCopy("Flag", 1);
-    m_inventaryModel->addItemCopy("Gold", 40);
-    */
-
 
     QQmlContext *context = engine.rootContext();
-
-
 
     context->setContextProperty("viewer", this);
     context->setContextProperty("jumpListModel", m_jumpListModel);
     context->setContextProperty("inventaryModel", m_inventaryModel);
-
-    //m_storyPoints[m_point.name()] = m_point;
-    //jumpTo(m_point.name());
-
 }
 
 QString Viewer2::answer()
