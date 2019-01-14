@@ -1,10 +1,8 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
-    DialogPoint \
-    Viewer \
+    DialogPoint \    
     XmlStoryReaderTest \
     XmlStoryWriterTest \
-    Viewer2 \
-    ApplTest
+    Viewer2
 
