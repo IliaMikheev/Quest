@@ -39,23 +39,12 @@ void JumpListModel::setTexts(const QStringList &texts)
         m_texts.clear();
         endRemoveRows();
     }
-    /*
-    beginRemoveRows(QModelIndex(),0,m_texts.count() );
-    endRemoveRows();
-    */
+
     if(texts.count()) {
         beginInsertRows(QModelIndex(), 0, texts.count()-1);
         m_texts = texts;
         endInsertRows();
     }
-    /*
-    int x = texts.count();
-    int y = texts.size();
-    qDebug() << "Rows count " + QString::number(texts.count());
-    qDebug() << "Rows count " + QString::number(texts.size());
-    qDebug() << x <<" " << y;
-    */
-
 }
 
 QString JumpListModel::pointText(int index)

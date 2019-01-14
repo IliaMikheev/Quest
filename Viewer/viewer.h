@@ -44,11 +44,6 @@ private:
     DialogPoint m_point;
     QHash<QString, DialogPoint> m_storyPoints;
     QStack<QString> m_jumpStack;
-
-
-
-
-
 };
 
 #endif // VIEWER_H
