@@ -5,9 +5,9 @@ QT += qml quick widgets
 CONFIG += c++11
 
 SOURCES += main.cpp \
-    viewer2.cpp \
     jumplistmodel.cpp \
-    inventarylistmodel.cpp
+    inventarylistmodel.cpp \
+    viewer.cpp
 
 RESOURCES += qml.qrc
 
@@ -20,9 +20,9 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    viewer2.h \
     jumplistmodel.h \
-    inventarylistmodel.h
+    inventarylistmodel.h \
+    viewer.h
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../DialogPoint/release/ -lDialogPoint
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../DialogPoint/debug/ -lDialogPoint

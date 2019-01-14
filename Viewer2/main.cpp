@@ -1,13 +1,13 @@
 #include <QApplication>
 #include <QQmlApplicationEngine>
-#include "viewer2.h"
+#include "viewer.h"
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
-    Viewer2 viewer;
+    Viewer viewer;
     viewer.initModels(engine);
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
