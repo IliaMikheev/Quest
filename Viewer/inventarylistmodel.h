@@ -8,7 +8,7 @@ class InventaryListModel : public QAbstractListModel
     Q_OBJECT
 
 public:
-    explicit InventaryListModel(QObject *parent = 0);
+    explicit InventaryListModel(QObject *parent = Q_NULLPTR);
 
     enum Roles {
         NameRole = Qt::UserRole+10,
@@ -36,7 +36,7 @@ public:
     void changeItems(const QString & name, uint count, bool add);
 
     uint itemCopyCount(const QString &name) const;
-    //const QHash<QString, int> &toHash() const;
+
     bool containsAtLeast(const QString &name, uint count);    
     bool isInventaryHas(const QHash<QString, uint> &requiredItems);
 

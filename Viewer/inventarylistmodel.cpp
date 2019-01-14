@@ -48,9 +48,7 @@ int InventaryListModel::count() const
  * устанавливает значение равное максимальному. *
  * */
 void InventaryListModel::addItemCopy(const QString &name, uint count)
-{
-
-    //int row = m_data.indexOf(Items{name,0});
+{    
     if (!m_itemHash.contains(name)) { // т.е. элемента с таким именем ещё нет
         int row =  m_data.length(); // т.к. новый вид ресурсов добавляется в конец
         m_itemHash[name] = row;
@@ -80,16 +78,14 @@ void InventaryListModel::addItemCopy(const QString &name, uint count)
  * становитмся 0 (спорно, но пока так), даный ключ убирается из m_data
 */
 void InventaryListModel::dropItemCopy(const QString &name, uint count)
-{
-    //int row = m_data.indexOf(Items{name,0});
-
+{    
     if (!m_itemHash.contains(name)) { // т.е. элемента с таким именем ещё нет
         return;
     }
 
     int row = m_itemHash[name];
     if (count >= m_data[row].count) {// Если нужно забрать из инвентаря все копии данного предмета или больше чем есть
-        //QModelIndex index = indexForName(name);
+
         beginRemoveRows(QModelIndex(), row, row);
         m_data.removeAt(row);        
         endRemoveRows();
@@ -99,7 +95,6 @@ void InventaryListModel::dropItemCopy(const QString &name, uint count)
 
     m_data[row].count -= count;
 
-    //QModelIndex index = indexForName(name);
     QModelIndex index = indexWithRow(row);
     emit dataChanged(index,index);
 }
@@ -133,8 +128,8 @@ uint InventaryListModel::itemCopyCount(const QString &name) const
     return m_data[row].count;
 }
 
-/*! Используется, чтобф обновить m_itemHash целиком,
- * например при удалении группы предметов из инвентаря */
+/*! Используется, чтобы обновить m_itemHash целиком,
+ *  например при удалении группы предметов из инвентаря */
 void InventaryListModel::updateItemHash()
 {
     m_itemHash.clear();
@@ -145,7 +140,9 @@ void InventaryListModel::updateItemHash()
     }
 }
 
-/* */
+/*!  Проверяет, содеожит ли инвентарь как минимум \a count предметов
+ *   с именем \a name
+*/
 bool InventaryListModel::containsAtLeast(const QString & name, uint count)
 {
     int i = m_itemHash.value(name, -1);

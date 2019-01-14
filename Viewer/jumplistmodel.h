@@ -8,7 +8,7 @@ class JumpListModel : public QAbstractListModel
 {
     Q_OBJECT
 public:
-    explicit JumpListModel(QObject *parent = 0);
+    explicit JumpListModel(QObject *parent = Q_NULLPTR);
 
     enum Roles {
         TextRole = Qt::UserRole,
@@ -21,8 +21,7 @@ public:
 
     // Интерфейс с C++ (DialogMashine и др.)
     QStringList texts() const;
-    void setTexts(const QStringList &texts); // Вот это действительно так и будет использоваться...
-
+    void setTexts(const QStringList &texts); //
     QString pointText(int index);
 
 signals:
@@ -30,7 +29,7 @@ signals:
 public slots:
 
 private:
-    QStringList m_texts; // или всё таки будут не строки, а ихи id?
+    QStringList m_texts; // или всё таки будут не строки, а int id?
 };
 
 #endif // JUPMSLISTMODEL_H
