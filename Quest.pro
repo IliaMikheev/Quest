@@ -4,5 +4,5 @@ SUBDIRS += \
     DialogPoint \    
     XmlStoryReaderTest \
     XmlStoryWriterTest \
-    Viewer2
+    Viewer
 
