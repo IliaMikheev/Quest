@@ -35,7 +35,7 @@ void JumpListModel::setTexts(const QStringList &texts)
 {
 
     if (m_texts.count()) {
-        beginRemoveRows(QModelIndex(),0,m_texts.count());
+        beginRemoveRows(QModelIndex(),0,m_texts.count()-1);
         m_texts.clear();
         endRemoveRows();
     }
